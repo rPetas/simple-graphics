@@ -32,6 +32,12 @@ public class Canvas {
         frame.pack();
         frame.setLocation(LOCATION_OFFSET, LOCATION_OFFSET);
         frame.setVisible(true);
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                System.exit(0);
+            }
+        });
     }
 
     /**
