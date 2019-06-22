@@ -10,6 +10,7 @@ import java.awt.image.RescaleOp;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Container of shapes
@@ -19,7 +20,7 @@ public class Canvas {
     private static final int MARGIN = 10;
     private static final int LOCATION_OFFSET = 120;
     private static Canvas canvas = new Canvas();
-    private ArrayList<Shape> shapes = new ArrayList<Shape>();
+    private List<Shape> shapes = new ArrayList<>();
     private BufferedImage background;
     private JFrame frame;
     private CanvasComponent component;
@@ -32,12 +33,7 @@ public class Canvas {
         frame.pack();
         frame.setLocation(LOCATION_OFFSET, LOCATION_OFFSET);
         frame.setVisible(true);
-        frame.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                System.exit(0);
-            }
-        });
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
@@ -47,6 +43,10 @@ public class Canvas {
      */
     public static Canvas getInstance() {
         return canvas;
+    }
+
+    public CanvasComponent getComponent() {
+        return component;
     }
 
     /**
@@ -156,7 +156,7 @@ public class Canvas {
             if (background != null) {
                 g.drawImage(background, 0, 0, null);
             }
-            for (Shape s : new ArrayList<Shape>(shapes)) {
+            for (Shape s : shapes) {
                 Graphics2D g2 = (Graphics2D) g.create();
                 s.paintShape(g2);
                 g2.dispose();

@@ -2,6 +2,7 @@ package org.academiadecodigo.simplegraphics.mouse;
 
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
 
+import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -12,7 +13,7 @@ import java.awt.event.MouseMotionListener;
  */
 public class Mouse implements MouseListener, MouseMotionListener {
 
-    MouseHandler handler;
+    private MouseHandler handler;
 
     /**
      * @param handler the mouse handler
@@ -24,11 +25,13 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        e = SwingUtilities.convertMouseEvent(e.getComponent(), e, Canvas.getInstance().getComponent());
         handler.mouseClicked(new org.academiadecodigo.simplegraphics.mouse.MouseEvent(e.getX(), e.getY()));
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        e = SwingUtilities.convertMouseEvent(e.getComponent(), e, Canvas.getInstance().getComponent());
         handler.mouseMoved(new org.academiadecodigo.simplegraphics.mouse.MouseEvent(e.getX(), e.getY()));
     }
 
