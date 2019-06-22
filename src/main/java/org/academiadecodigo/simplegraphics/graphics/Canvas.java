@@ -45,10 +45,6 @@ public class Canvas {
         return canvas;
     }
 
-    public Component getComponent() {
-        return component;
-    }
-
     /**
      * Pauses so that the user can see the picture before it is transformed.
      */
@@ -145,7 +141,7 @@ public class Canvas {
      * @param handler reference to the MouseListener object
      */
     public void addMouseListener(MouseListener handler) {
-        frame.addMouseListener(handler);
+        component.addMouseListener(handler);
     }
 
     class CanvasComponent extends JComponent {
@@ -156,7 +152,8 @@ public class Canvas {
             if (background != null) {
                 g.drawImage(background, 0, 0, null);
             }
-            for (Shape s : shapes) {
+
+            for (Shape s : new ArrayList<>(shapes)) {
                 Graphics2D g2 = (Graphics2D) g.create();
                 s.paintShape(g2);
                 g2.dispose();
