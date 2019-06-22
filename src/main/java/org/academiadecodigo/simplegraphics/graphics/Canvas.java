@@ -45,7 +45,7 @@ public class Canvas {
         return canvas;
     }
 
-    public CanvasComponent getComponent() {
+    public Component getComponent() {
         return component;
     }
 
